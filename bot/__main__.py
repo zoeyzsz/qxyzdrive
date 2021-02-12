@@ -13,7 +13,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot.modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest, information
+from bot.modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest
 
 
 @run_async
@@ -75,11 +75,11 @@ def log(update, context):
 @run_async
 def bot_help(update, context):
     help_string = f'''
-/{BotCommands.MirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring to Google Drive
+/{BotCommands.MirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring to Google Drive
 
-/{BotCommands.UnzipMirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring. If File is Archive, Extracts it to Google Drive
+/{BotCommands.UnzipMirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring. If File is Archive, Extracts it to Google Drive
 
-/{BotCommands.TarMirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring & Upload With Archived File (.tar) Extentions
+/{BotCommands.TarMirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring & Upload With Archived File (.tar) Extentions
 
 /{BotCommands.WatchCommand} : Mirror Via YouTube-DL. Click /{BotCommands.WatchCommand} For More Help
 
