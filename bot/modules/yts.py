@@ -9,9 +9,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMo
 from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 from telegram.message import Message
 
-
-@run_async
-def yts(update, context):
+async def yts(update, context):
     qual = None
     max_limit = 5
 
@@ -30,20 +28,20 @@ def yts(update, context):
     elif get_limit.search(input_):
         max_limit = int(get_limit.search(input_).group().strip('-l'))
     if len(input_) == 0:
-        sendMessage("No Input Found!", del_in=5)
+        context.bot.editMessageText("No Input Found!", del_in=5)
         return
     URL = "https://yts.mx/api/v2/list_movies.json?query_term={query}&limit={limit}"
-    sendMessage("Fetching....")
+    context.bot.editMessageText("Fetching....")
     resp = requests.get(URL.format(query=_movie, limit=max_limit))
     datas = resp.json()
     if datas['status'] != "ok":
-        sendMessage("WRONG STATUS")
+        context.bot.editMessageText("Wrong Status")
         return
     if datas['data']['movie_count'] == 0 or len(datas['data']) == 3:
-        sendMessage(f"{_movie} Not Found!", del_in=5)
+        context.bot.editMessageText(f"{_movie} Not Found!", del_in=5)
         return
     _matches = datas['data']['movie_count']
-    sendMessage(f"{_matches} Matches Found!, Sending {len(datas['data']['movies'])}.")
+    context.bot.editMessageText(f"{_matches} Matches Found!, Sending {len(datas['data']['movies'])}.")
     for data in datas['data']['movies']:
         _title = data['title_long']
         _rating = data['rating']
@@ -70,17 +68,18 @@ Available in: {qualsize}'''
             files = files.replace('/', '\\')
             with open(files, 'wb') as f:
                 f.write(requests.get(_torrents[_qualities.index(def_quality)]['url']).content)
-            sendMessage.client.send_document(chat_id=message.chat.id,
+            context.bot.sendMessage.client.send_document(chat_id=message.chat.id,
                                                document=files,
                                                caption=capts,
                                                disable_notification=True)
             os.remove(files)
         else:
-            sendMessage("Not Found!", del_in=5)
+            context.bot.editMessageText("Not Found", del_in=5)
             return
     return
     
-    YIFFY_HANDLER = CommandHandler(BotCommands.YTSCommand, yts, 
+
+yts_handler = CommandHandler(BotCommands.YtsCommand, speedtst, 
                                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 
-dispatcher.add_handler(YIFFY_HANDLER)
+dispatcher.add_handler(yts_handler)
