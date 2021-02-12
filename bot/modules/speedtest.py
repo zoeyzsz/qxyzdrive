@@ -20,8 +20,6 @@ def speedtst(update, context):
     test.results.share()
     result = test.results.dict()
     context.bot.editMessageText(
-        "🖥 IP : "
-        f"{hostname}\n"
         "🔻 D : "
         f"{speed_convert(result['download'])}\n"
         "🔺 U : "
