@@ -63,7 +63,8 @@ Size: {_torrents[_qualities.index(def_quality)]['size']}
 Type: {_torrents[_qualities.index(def_quality)]['type']}
 Seeds: {_torrents[_qualities.index(def_quality)]['seeds']}
 Date Uploaded: {_torrents[_qualities.index(def_quality)]['date_uploaded']}
-Available in: {qualsize}
+Available in: {qualsize}"""
+
         if def_quality in _qualities:
             files = f"{_title}{_torrents[_qualities.index(def_quality)]['quality']}.torrent"
             files = files.replace('/', '\\')
@@ -76,7 +77,10 @@ Available in: {qualsize}
             os.remove(files)
         else:
             context.bot.editMessageText("Not Found", del_in=5)
-
+             return
+    return
+"""
+                    
 yts_handler = CommandHandler(BotCommands.YtsCommand, yts_film, 
                                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 
