@@ -27,3 +27,4 @@ lxml
 telegraph
 appdirs
 speedtest-cli
+messages
