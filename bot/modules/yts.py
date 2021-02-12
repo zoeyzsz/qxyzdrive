@@ -10,7 +10,7 @@ from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 from telegram.message import Message
 
 @run_async
-def yts_film(update, context):
+def ytsfilm(update, context):
     qual = None
     max_limit = 5
 
@@ -29,17 +29,17 @@ def yts_film(update, context):
     elif get_limit.search(input_):
         max_limit = int(get_limit.search(input_).group().strip('-l'))
     if len(input_) == 0:
-        context.bot.editMessageText("No Input Found!", del_in=5)
+        context.bot.editMessageText("No Input Found!", context.bot, update)
         return
     URL = "https://yts.mx/api/v2/list_movies.json?query_term={query}&limit={limit}"
     context.bot.editMessageText("Fetching....")
     resp = requests.get(URL.format(query=_movie, limit=max_limit))
     datas = resp.json()
     if datas['status'] != "ok":
-        context.bot.editMessageText("Wrong Status")
+        context.bot.editMessageText("Wrong Status", context.bot, update)
         return
     if datas['data']['movie_count'] == 0 or len(datas['data']) == 3:
-        context.bot.editMessageText(f"{_movie} Not Found!", del_in=5)
+        context.bot.editMessageText(f"{_movie} Not Found!", context.bot, update)
         return
     _matches = datas['data']['movie_count']
     context.bot.editMessageText(f"{_matches} Matches Found!, Sending {len(datas['data']['movies'])}.")
@@ -63,8 +63,7 @@ Size: {_torrents[_qualities.index(def_quality)]['size']}
 Type: {_torrents[_qualities.index(def_quality)]['type']}
 Seeds: {_torrents[_qualities.index(def_quality)]['seeds']}
 Date Uploaded: {_torrents[_qualities.index(def_quality)]['date_uploaded']}
-Available in: {qualsize}"""
-
+Available in: {qualsize}
         if def_quality in _qualities:
             files = f"{_title}{_torrents[_qualities.index(def_quality)]['quality']}.torrent"
             files = files.replace('/', '\\')
@@ -75,13 +74,13 @@ Available in: {qualsize}"""
                                                caption=capts,
                                                disable_notification=True)
             os.remove(files)
+            
         else:
-            context.bot.editMessageText("Not Found", del_in=5)
+            context.bot.editMessageText("Not Found", context.bot, update)
              return
     return
-"""
                     
-yts_handler = CommandHandler(BotCommands.YtsCommand, yts_film, 
-                                                  filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
+ ytsmovies_handler = CommandHandler(BotCommands.YtsCommand, ytsfilm,
+                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 
-dispatcher.add_handler(yts_handler)
+dispatcher.add_handler(ytsmovies_handler)
