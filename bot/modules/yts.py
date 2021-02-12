@@ -9,7 +9,8 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMo
 from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 from telegram.message import Message
 
-async def yts_film(update, context):
+@run_async
+def yts_film(update, context):
     qual = None
     max_limit = 5
 
