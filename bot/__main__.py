@@ -101,6 +101,8 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand}: Check Internet Speed Test
 
+/{BotCommands.YTSCommand}: Yiffy Film Search
+
 '''
     sendMessage(help_string, context.bot, update)
 
