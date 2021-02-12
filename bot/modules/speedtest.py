@@ -1,4 +1,5 @@
 import speedtest
+import socket
 
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot import dispatcher, AUTHORIZED_CHATS
@@ -11,6 +12,7 @@ from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
 def speedtst(update, context):
     message = update.effective_message
     ed_msg = message.reply_text("Running Speed Test . . . 💨")
+    ip_address = socket.gethostbyname(hostname)
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
@@ -18,6 +20,8 @@ def speedtst(update, context):
     test.results.share()
     result = test.results.dict()
     context.bot.editMessageText(
+        "🖥 IP : "
+        f"{hostname}\n"
         "🔻 D : "
         f"{speed_convert(result['download'])}\n"
         "🔺 U : "
