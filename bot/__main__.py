@@ -75,25 +75,23 @@ def log(update, context):
 @run_async
 def bot_help(update, context):
     help_string = f'''
-/{BotCommands.HelpCommand}: To get this message
+/{BotCommands.MirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring to Google Drive
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
+/{BotCommands.UnzipMirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring. If File is Archive, Extracts it to Google Drive
 
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link] : starts mirroring and if downloaded file is any archive , extracts it to google drive
+/{BotCommands.TarMirrorCommand} [mega.nz link] [magnet-link] / [torrent-magnet] [direct-link] [download_url] [zippyshare] [mediafire] [github.com link] [osdn.net link] [yadi.sk] : Start Mirroring & Upload With Archived File (.tar) Extentions
 
-/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: start mirroring and upload the archived (.tar) version of the download
+/{BotCommands.WatchCommand} : Mirror Via YouTube-DL. Click /{BotCommands.WatchCommand} For More Help
 
-/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+/{BotCommands.TarWatchCommand} : Mirror Via YouTube-DL and Upload Archive File With (.tar) Extention
 
-/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
+/{BotCommands.CancelMirror} : Reply to your mirror download message or use /{BotCommands.CancelMirror} [GID]
 
-/{BotCommands.CancelMirror} : Reply to the message by which the download was initiated and that download will be cancelled
+/{BotCommands.StatusCommand} : Shows a Status of all the Downloads
 
-/{BotCommands.StatusCommand}: Shows a status of all the downloads
+/{BotCommands.ListCommand} : Search For Files / Folders on Google Drive. If Found, the bot will reply with a link
 
-/{BotCommands.ListCommand} [search term]: Searches the search term in the Google drive, if found replies with the link
-
-/{BotCommands.SpeedCommand}: Check Internet Speed Test
+/{BotCommands.SpeedCommand} : Check Internet Speed Test
 
 '''
     sendMessage(help_string, context.bot, update)
