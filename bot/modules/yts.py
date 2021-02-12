@@ -80,7 +80,7 @@ Available in: {qualsize}'''
             return
     return
     
-    YTS_HANDLER = CommandHandler(BotCommands.YTSCommand, yts, 
+    YIFFY_HANDLER = CommandHandler(BotCommands.YTSCommand, yts, 
                                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 
-dispatcher.add_handler(YTS_HANDLER)
+dispatcher.add_handler(YIFFY_HANDLER)
