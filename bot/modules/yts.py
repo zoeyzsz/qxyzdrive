@@ -1,17 +1,17 @@
 import os
 import re
 import requests
-import messages
 
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot import dispatcher, AUTHORIZED_CHATS
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 from telegram.ext import CallbackContext, Filters, run_async, CommandHandler
+from telegram.message import Message
 
 
 @run_async
-def yts(message: Message):
+def yts(update, context):
     qual = None
     max_limit = 5
 
@@ -30,20 +30,20 @@ def yts(message: Message):
     elif get_limit.search(input_):
         max_limit = int(get_limit.search(input_).group().strip('-l'))
     if len(input_) == 0:
-        await message.edit("No Input Found!", del_in=5)
+        sendMessage("No Input Found!", del_in=5)
         return
     URL = "https://yts.mx/api/v2/list_movies.json?query_term={query}&limit={limit}"
-    await message.edit("Fetching....")
+    sendMessage("Fetching....")
     resp = requests.get(URL.format(query=_movie, limit=max_limit))
     datas = resp.json()
     if datas['status'] != "ok":
-        await message.edit("WRONG STATUS")
+        sendMessage("WRONG STATUS")
         return
     if datas['data']['movie_count'] == 0 or len(datas['data']) == 3:
-        await message.edit(f"{_movie} Not Found!", del_in=5)
+        sendMessage(f"{_movie} Not Found!", del_in=5)
         return
     _matches = datas['data']['movie_count']
-    await message.edit(f"{_matches} Matches Found!, Sending {len(datas['data']['movies'])}.")
+    sendMessage(f"{_matches} Matches Found!, Sending {len(datas['data']['movies'])}.")
     for data in datas['data']['movies']:
         _title = data['title_long']
         _rating = data['rating']
@@ -70,13 +70,13 @@ Available in: {qualsize}'''
             files = files.replace('/', '\\')
             with open(files, 'wb') as f:
                 f.write(requests.get(_torrents[_qualities.index(def_quality)]['url']).content)
-            await message.client.send_document(chat_id=message.chat.id,
+            sendMessage.client.send_document(chat_id=message.chat.id,
                                                document=files,
                                                caption=capts,
                                                disable_notification=True)
             os.remove(files)
         else:
-            message.edit("NOT FOUND", del_in=5)
+            sendMessage("Not Found!", del_in=5)
             return
     return
     
