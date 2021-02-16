@@ -8,6 +8,9 @@ import string
 import aria2p
 import telegram.ext as tg
 from dotenv import load_dotenv
+from pyrogram import Client
+from telegraph import Telegraph
+
 import socket
 import faulthandler
 faulthandler.enable()
@@ -84,7 +87,7 @@ try:
         DOWNLOAD_DIR = DOWNLOAD_DIR + '/'
     DOWNLOAD_STATUS_UPDATE_INTERVAL = int(getConfig('DOWNLOAD_STATUS_UPDATE_INTERVAL'))
     OWNER_ID = int(getConfig('OWNER_ID'))
-    OWNER_IDS = tuple(filter(lambda x: x, map(int, os.environ.get("OWNER_IDS", "").split())))
+	OWNER_IDS = tuple(filter(lambda x: x, map(int, os.environ.get("OWNER_IDS", "").split())))
     AUTO_DELETE_MESSAGE_DURATION = int(getConfig('AUTO_DELETE_MESSAGE_DURATION'))
     TELEGRAM_API = getConfig('TELEGRAM_API')
     TELEGRAM_HASH = getConfig('TELEGRAM_HASH')
