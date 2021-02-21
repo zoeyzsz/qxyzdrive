@@ -11,7 +11,21 @@ python-magic
 beautifulsoup4>=4.8.2,<4.8.10
 Pyrogram>=0.16.0,<0.16.10
 TgCrypto>=1.1.1,<1.1.10
-git+https://gitlab.com/magneto261290/youtube-dl
+aiofiles
+aiohttp
+dnspython
+gitpython
+oauth2client
+Pillow
+pybase64
+pySmartDL
+pytz
+selenium
+setuptools
+youtube-dl
 lxml
 telegraph
 appdirs
+speedtest-cli
+messages
+© 2021 GitHub, Inc.
