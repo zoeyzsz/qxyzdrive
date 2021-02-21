@@ -11,9 +11,9 @@ from bot import dispatcher, updater, botStartTime
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
-from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
-from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete
+from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
+from bot.helper.telegram_helper.filters import CustomFilters
+from bot.modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest
 
 
 @run_async
@@ -43,7 +43,7 @@ def stats(update, context):
 @run_async
 def start(update, context):
     start_string = f'''
-This is a bot which can mirror all your links to Google drive!
+This is a bot which can mirror all your links to Google Drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     sendMessage(start_string, context.bot, update)
@@ -75,29 +75,23 @@ def log(update, context):
 @run_async
 def bot_help(update, context):
     help_string = f'''
-/{BotCommands.HelpCommand}: To get this message
+/{BotCommands.MirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring to Google Drive
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
+/{BotCommands.UnzipMirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring. If File is Archive, Extracts it to Google Drive
 
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link] : starts mirroring and if downloaded file is any archive , extracts it to google drive
+/{BotCommands.TarMirrorCommand} [mega.nz link] [magnet-link] [direct-link] [download_url] : Start Mirroring & Upload With Archived File (.tar) Extentions
 
-/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: start mirroring and upload the archived (.tar) version of the download
+/{BotCommands.WatchCommand} : Mirror Via YouTube-DL. Click /{BotCommands.WatchCommand} For More Help
 
-/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+/{BotCommands.TarWatchCommand} : Mirror Via YouTube-DL and Upload Archive File With (.tar) Extention
 
-/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
+/{BotCommands.CancelMirror} : Reply to your mirror download message or use /{BotCommands.CancelMirror} [GID]
 
-/{BotCommands.CancelMirror} : Reply to the message by which the download was initiated and that download will be cancelled
+/{BotCommands.StatusCommand} : Shows a Status of all the Downloads
 
-/{BotCommands.StatusCommand}: Shows a status of all the downloads
+/{BotCommands.ListCommand} : Search For Files / Folders on Google Drive. If Found, the bot will reply with a link
 
-/{BotCommands.ListCommand} [search term]: Searches the search term in the Google drive, if found replies with the link
-
-/{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
-
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by owner of the bot)
-
-/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
+/{BotCommands.SpeedCommand} : Check Internet Speed Test
 
 '''
     sendMessage(help_string, context.bot, update)
