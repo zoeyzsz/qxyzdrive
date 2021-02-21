@@ -28,4 +28,3 @@ telegraph
 appdirs
 speedtest-cli
 messages
-© 2021 GitHub, Inc.
