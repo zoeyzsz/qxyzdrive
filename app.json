@@ -32,10 +32,6 @@
       "description": "Should be an integer. ID of owner of bot",
       "required": true
     },
-    "OWNER_IDS": {
-      "description": "ID of second owner of bot",
-      "required": true
-    },
     "DOWNLOAD_DIR": {
       "description": "Directory where the bot downloaded files and then delete after file upload to Google Drive",
       "value": "/home/mirror-bot/downloads",
@@ -86,11 +82,6 @@
     },
     "BLOCK_MEGA_LINKS": {
       "description": "Set true/false if you don't like user mirror from mega.nz (type file)",
-      "value": "False",
-      "required": false
-    },
-    "BLOCK_MEGA_FOLDER": {
-      "description": "Set true/false if you don't like user mirror from mega.nz (type folder)",
       "value": "False",
       "required": false
     },
