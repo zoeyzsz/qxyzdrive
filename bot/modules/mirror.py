@@ -2,10 +2,10 @@ import requests
 from telegram.ext import CommandHandler, run_async
 from telegram import InlineKeyboardMarkup
 
-from bot import Interval, INDEX_URL, BUTTON_THREE_NAME, BUTTON_THREE_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BLOCK_MEGA_LINKS
+from bot import Interval, INDEX_URL, BUTTON_THREE_NAME, BUTTON_THREE_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BLOCK_MEGA_LINKS, BLOCK_MEGA_FOLDER
 from bot import dispatcher, DOWNLOAD_DIR, DOWNLOAD_STATUS_UPDATE_INTERVAL, download_dict, download_dict_lock, SHORTENER, SHORTENER_API
 from bot.helper.ext_utils import fs_utils, bot_utils
-from bot.helper.ext_utils.bot_utils import setInterval
+from bot.helper.ext_utils.bot_utils import setInterval, get_mega_link_type
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException, NotSupportedExtractionArchive
 from bot.helper.mirror_utils.download_utils.aria2_download import AriaDownloadHelper
 from bot.helper.mirror_utils.download_utils.mega_downloader import MegaDownloadHelper
@@ -244,8 +244,11 @@ def _mirror(bot, update, isTar=False, extract=False):
         LOGGER.info(f'{link}: {e}')
     listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
     if bot_utils.is_mega_link(link):
-        if BLOCK_MEGA_LINKS:
-            sendMessage("<b>🚫 Mega Links Blocked! 🚫</b>", bot, update)
+        link_type = get_mega_link_type(link)
+        if link_type == "folder" and BLOCK_MEGA_FOLDER:
+            sendMessage("<b>🚫 Mega Folder Blocked!</b> 🚫", bot, update)
+        elif BLOCK_MEGA_LINKS:
+            sendMessage("<b>🚫 Mega Links Blocked!</b> 🚫", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener)
