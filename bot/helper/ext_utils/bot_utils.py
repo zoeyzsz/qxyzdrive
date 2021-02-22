@@ -4,6 +4,7 @@ import threading
 import time
 
 from bot import download_dict, download_dict_lock
+from bot.helper.telegram_helper.bot_commands import BotCommands
 
 LOGGER = logging.getLogger(__name__)
 
