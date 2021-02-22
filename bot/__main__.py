@@ -95,7 +95,7 @@ def bot_help(update, context):
 
 /{BotCommands.ListCommand} : Search file/folder in the Google drive, if found replies with the link
 
-/{BotCommands.ListCommand} : Search file/folder in the Google drive, if found replies with the link
+/{BotCommands.SpeedCommand} : Check Internet Speedtest
 '''
     sendMessage(help_string, context.bot, update)
 
