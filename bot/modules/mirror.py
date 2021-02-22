@@ -146,7 +146,6 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str, size):
         with download_dict_lock:
-            msg =+ f'📤 <b>Your Link/File Successfully Uploaded to Google Drive</b> ☑️\n\n🔖 <b>Detail :-</b> 👇\n\n'
             msg = f'<b>📂 File Name :</b> <code>{download_dict[self.uid].name()}</code>\n<b>📥 Size : {size}</b>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
