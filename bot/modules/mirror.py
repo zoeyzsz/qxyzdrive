@@ -146,6 +146,7 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str, size):
         with download_dict_lock:
+            msg = f'📤 <b>Your Link/File Successfully Uploaded to Google Drive</b> ☑️\n\n🔖 <b>Detail :-</b> 👇\n\n'
             msg = f'<b>📂 File Name :</b> <code>{download_dict[self.uid].name()}</code>\n<b>📥 Size : {size}</b>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
@@ -174,7 +175,7 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\n💨 <b>Uploaded By :- :- {uname}</b> 📤'
+                msg += f'\n\n📢 <b>Uploaded :- {uname}</b> ✨'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -235,7 +236,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('<b>No download source provided, please send me the link / torrent magnet / telegram file<b>', bot, update)
+        sendMessage('No download source provided, please send me the link / torrent magnet / telegram file', bot, update)
         return
 
     try:

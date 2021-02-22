@@ -11,9 +11,9 @@ from bot import dispatcher, updater, botStartTime
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
-from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
-from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete
+from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
+from bot.helper.telegram_helper.filters import CustomFilters
+from bot.modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest
 
 
 @run_async
@@ -77,22 +77,25 @@ def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
+/{BotCommands.MirrorCommand} : Start mirroring the link to Google Drive
 
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link] : Start mirroring and if downloaded file is any archive, extracts it to Google Drive
+/{BotCommands.UnzipMirrorCommand} : Start mirroring and if downloaded file is any archive, extracts it to Google Drive
 
-/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) extension of the download
+/{BotCommands.TarMirrorCommand} : Start mirroring and upload the archived (.tar) extension of the download
 
-/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+/{BotCommands.WatchCommand} : Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
 /{BotCommands.TarWatchCommand} : Mirror through youtube-dl and (.tar) extension before uploading
 
-/{BotCommands.CancelMirror} : Reply to the message by which the download
+/{BotCommands.CancelMirror} : Cancel Mirror
+
+/{BotCommands.CloneCommand} : Clone / Copy files from Google Drive
 
 /{BotCommands.StatusCommand}: Shows a status of all the downloads
 
-/{BotCommands.ListCommand} [Search Term]: Search file/folder in the Google drive, if found replies with the link
+/{BotCommands.ListCommand} : Search file/folder in the Google drive, if found replies with the link
 
+/{BotCommands.ListCommand} : Search file/folder in the Google drive, if found replies with the link
 '''
     sendMessage(help_string, context.bot, update)
 
