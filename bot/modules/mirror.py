@@ -131,7 +131,7 @@ class MirrorListener(listeners.MirrorListeners):
             uname = f"@{self.message.from_user.username}"
         else:
             uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
-        msg = f"{uname} your download has been stopped due to: {error}"
+        msg = f"Hi {uname}\n\n 😡 Your download has been stopped {error}"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -146,13 +146,13 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str, size):
         with download_dict_lock:
-            msg = f'<b>Filename : </b><code>{download_dict[self.uid].name()}</code>\n<b>Size : </b><code>{size}</code>'
+            msg = f'<b>📂 File Name :</b> <code>{download_dict[self.uid].name()}</code>\n<b>📥 Size : {size}</b>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
                 surl = requests.get('https://{}/api?api={}&url={}&format=text'.format(SHORTENER, SHORTENER_API, link)).text
-                buttons.buildbutton("⚡Drive Link⚡", surl)
+                buttons.buildbutton("⚡Google Drive⚡", surl)
             else:
-                buttons.buildbutton("⚡Drive Link⚡", link)
+                buttons.buildbutton("⚡Google Drive⚡", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 share_url = requests.utils.requote_uri(f'{INDEX_URL}/{download_dict[self.uid].name()}')
@@ -174,7 +174,7 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\ncc : {uname}'
+                msg += f'\n\n💨 <b>Uploaded By :- :- {uname}</b> 📤'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -182,21 +182,6 @@ class MirrorListener(listeners.MirrorListeners):
             del download_dict[self.uid]
             count = len(download_dict)
         sendMarkup(msg, self.bot, self.update, InlineKeyboardMarkup(buttons.build_menu(2)))
-        if count == 0:
-            self.clean()
-        else:
-            update_all_messages()
-
-    def onUploadError(self, error):
-        e_str = error.replace('<', '').replace('>', '')
-        with download_dict_lock:
-            try:
-                fs_utils.clean_download(download_dict[self.uid].path())
-            except FileNotFoundError:
-                pass
-            del download_dict[self.message.message_id]
-            count = len(download_dict)
-        sendMessage(e_str, self.bot, self.update)
         if count == 0:
             self.clean()
         else:
@@ -250,7 +235,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('No download source provided', bot, update)
+        sendMessage('<b>No download source provided, please send me the link / torrent magnet / telegram file<b>', bot, update)
         return
 
     try:
@@ -260,7 +245,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
     if bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
-            sendMessage("Mega links are blocked bcoz mega downloading is too much unstable and buggy. mega support will be added back after fix", bot, update)
+            sendMessage("<b>🚫 Mega Links Blocked! 🚫</b>", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener)
