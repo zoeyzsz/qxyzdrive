@@ -6,6 +6,7 @@ from bot import AUTHORIZED_CHATS, OWNER_ID, OWNER_IDS, download_dict, download_d
 class CustomFilters:
     class _OwnerFilter(BaseFilter):
         def filter(self, message):
+            id = message.from_user.id
             return bool(message.from_user.id == OWNER_ID or id in OWNER_IDS)
 
     owner_filter = _OwnerFilter()
