@@ -1,5 +1,6 @@
 requests
 psutil
+bs4
 python-telegram-bot==12.6.1 
 google-api-python-client>=1.7.11,<1.7.20
 google-auth-httplib2>=0.0.3,<0.1.0
@@ -16,15 +17,18 @@ aiohttp
 dnspython
 gitpython
 oauth2client
-Pillow
+Pillow>=4.2.0
 pybase64
 pySmartDL
 pytz
 selenium
+feedparser
+natsort
+messages
 setuptools
 youtube-dl
 lxml
 telegraph
 appdirs
-speedtest-cli
+speedtest-cli>=2.1.2
 messages
