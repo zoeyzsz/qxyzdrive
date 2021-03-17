@@ -38,11 +38,11 @@ async def return_search(query, page=1, sukebei=False):
                 if splitted.scheme == 'magnet' and splitted.query:
                     link = f'<code>{link}</code>'
                 newtext = f'''{a + 1}. {html.escape(i["title"])}
-<b>Link:</b> {link}
-<b>Size:</b> {i["nyaa_size"]}
-<b>Seeders:</b> {i["nyaa_seeders"]}
-<b>Leechers:</b> {i["nyaa_leechers"]}
-<b>Category:</b> {i["nyaa_category"]}\n\n'''
+<b>🧲 Link :</b> {link}
+<b>📥 Size :</b> {i["nyaa_size"]}
+<b>🧲 Seeders :</b> {i["nyaa_seeders"]}
+<b>🧲 Leechers :</b> {i["nyaa_leechers"]}
+<b>🔖 Category :</b> {i["nyaa_category"]}\n\n'''
                 futtext = text + newtext
                 if (a and not a % 10) or len((await parser.parse(futtext))['message']) > 4096:
                     results.append(text)
@@ -138,14 +138,14 @@ async def nyaa_callback(client, callback_query):
 @run_async
 def searchhelp(update, context):
     help_string = '''
-• /ts <i>[search query]</i>
-• /nyaa <i>[search query]</i>
-• /nyaasi <i>[search query]</i>
+• /ts [Search Query]
+• /nyaa [Search Query]
+• /nyaasi [Search Query]
 
-• /sts <i>[search query]</i>
-• /sukebei <i>[search query]</i>
+• /sts [Search Query]
+• /sukebei [Search Query]
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
     
 SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp)

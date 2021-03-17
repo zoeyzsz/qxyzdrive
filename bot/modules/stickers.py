@@ -426,17 +426,17 @@ def makepack_internal(
 @run_async
 def stickhelp(update, context):
     help_string = '''
-• `/stickerid`*:* reply to a sticker to me to tell you its file ID.
-• `/getsticker`*:* reply to a sticker to me to upload its raw PNG file.
-• `/kang`*:* reply to a sticker to add it to your pack.
-• `/stickers`*:* Find stickers for given term on combot sticker catalogue
+• `/sid`: Reply to a sticker to me to tell you its file ID.
+• `/getsticker` : Reply to a sticker to me to upload its raw PNG file.
+• `/kang` : Reply to a sticker to add it to your pack.
+• `/sticker` : Find stickers for given term on combot sticker catalogue.
 '''
-    update.effective_message.reply_photo("https://telegra.ph/file/db03910496f06094f1f7a.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.MARKDOWN)
 
-STICKERID_HANDLER = CommandHandler("stickerid", stickerid)
+STICKERID_HANDLER = CommandHandler("sid", stickerid)
 GETSTICKER_HANDLER = CommandHandler("getsticker", getsticker)
 KANG_HANDLER = CommandHandler("kang", kang)
-STICKERS_HANDLER = CommandHandler("stickers", cb_sticker)
+STICKERS_HANDLER = CommandHandler("sticker", cb_sticker)
 STICKHELP_HANDLER = CommandHandler("stickerhelp", stickhelp)
 
 
