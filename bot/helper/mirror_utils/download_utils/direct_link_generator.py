@@ -11,10 +11,18 @@ for original authorship. """
 from bot import UPTOBOX_TOKEN
 import json
 import re
+import sys
+import argparse
+import traceback
 import math
 import urllib.parse
 from os import popen
 from random import choice
+
+try:
+	from urllib.parse import unquote
+except ImportError:
+	from urllib import unquote
 
 import requests
 from bs4 import BeautifulSoup
