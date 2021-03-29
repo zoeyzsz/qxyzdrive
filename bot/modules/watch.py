@@ -17,14 +17,11 @@ def _watch(bot: Bot, update, isTar=False):
     try:
         link = message_args[1]
     except IndexError:
-        msg = f"/{BotCommands.WatchCommand} : [yt_dl supported link] [quality] |[Custom Name] to mirror with youtube_dl.\n\n"
-        msg += "<b>Note :- Quality and Custom Name are optional</b>\n\nExample of quality :- audio, 144, 240, 360, 480, 720, 1080, 2160."
-        msg += "\n\n• <b>If you want to use Custom Filename</b>, enter it after |"
-        msg += f"\n\nExample :-\n<code>/{BotCommands.WatchCommand} https://youtu.be/QMOadtGpwlw 720 |Ikson - New Day </code>\n\n"
-        msg += "This file will be downloaded in 720p quality and it's name will be <b>Ikson - Alive</b>\n\n"
-        msg += "• <b>if you want to convert to .mp3 / music</b>"
-        msg += f"\n\nExample :-\n<code>/{BotCommands.WatchCommand} https://youtu.be/QMOadtGpwlw audio |Ikson - New Day </code>\n\n"
-        msg += "This file will be downloaded in .mp3/audio and it's name will be <b>Ikson - Alive.mp3</b>\n\n"
+        msg = f"/{BotCommands.WatchCommand} [yt_dl supported link] [quality] |[CustomName] to mirror with youtube_dl.\n\n"
+        msg += "<b>Note :- Quality and custom name are optional</b>\n\nExample of quality :- audio, 144, 240, 360, 480, 720, 1080, 2160."
+        msg += "\n\nIf you want to use custom filename, plz enter it after |"
+        msg += f"\n\nExample :-\n<code>/{BotCommands.WatchCommand} https://youtu.be/ocX2FN1nguA 720 |My video bro</code>\n\n"
+        msg += "This file will be downloaded in 720p quality and it's name will be <b>My video bro</b>"
         sendMessage(msg, bot, update)
         return
     try:

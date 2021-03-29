@@ -18,11 +18,11 @@ def speedtst(update, context):
     test.results.share()
     result = test.results.dict()
     context.bot.editMessageText(
-        "🔻 D : "
+        "🔻 Download Speed : "
         f"{speed_convert(result['download'])}\n"
-        "🔺 U : "
+        "🔺 Upload Speed : "
         f"{speed_convert(result['upload'])}\n"
-        "📶 PING : "
+        "📶 Ping : "
         f"{result['ping']}\n"
         "🏬 ISP : "
         f"{result['client']['isp']}",
@@ -34,7 +34,7 @@ def speed_convert(size):
     """Hi human, you can't read bytes?"""
     power = 2 ** 10
     zero = 0
-    units = {0: "", 1: "KB/s", 2: "MB/s", 3: "GB/s", 4: "TB/s"}
+    units = {0: "", 1: "Kb/s", 2: "Mb/s", 3: "Gb/s", 4: "Tb/s"}
     while size > power:
         size /= power
         zero += 1

@@ -11,9 +11,9 @@ from bot import dispatcher, updater, botStartTime
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
-from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
-from bot.helper.telegram_helper.filters import CustomFilters
-from bot.modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest
+from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
+from .helper.telegram_helper.filters import CustomFilters
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest
 
 
 @run_async
@@ -28,22 +28,22 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>⏰ Bot Uptime : {currentTime} 🤖</b>\n' \
-            f'<b>💨 Total Disk Space : {total}</b>\n' \
-            f'<b>📈 Used : {used}</b> ' \
-            f'<b>📉 Free : {free}</b>\n\n' \
-            f'<b>📊 Data Usage 📊</b>\n<b>🔺 Upload : {sent}</b>\n' \
-            f'<b>🔻 Download : {recv}</b>\n\n📊 <b>Performance Meter</b> 📊\n\n' \
-            f'<b> 🖥️ CPU  : {cpuUsage}%</b>\n ' \
-            f'<b>⚙️ RAM : {memory}%</b>\n ' \
-            f'<b>🗃️ Disk  : {disk}%</b>'
+    stats = f'<b>Bot Uptime ⌚:</b> {currentTime}\n' \
+            f'<b>Total disk space🗄️:</b> {total}\n' \
+            f'<b>Used 🗃️:</b> {used}  ' \
+            f'<b>Free 🗃️:</b> {free}\n\n' \
+            f'📇Data Usage📇\n<b>Uploaded :</b> {sent}\n' \
+            f'<b>Downloaded:</b> {recv}\n\n' \
+            f'<b>CPU 🖥️:</b> {cpuUsage}% ' \
+            f'<b>RAM ⛏️:</b> {memory}% ' \
+            f'<b>Disk 🗄️:</b> {disk}%'
     sendMessage(stats, context.bot, update)
 
 
 @run_async
 def start(update, context):
     start_string = f'''
-This is a bot which can mirror all your links to Google Drive!
+This is a bot which can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     sendMessage(start_string, context.bot, update)
@@ -77,25 +77,30 @@ def bot_help(update, context):
     help_string = f'''
 /{BotCommands.HelpCommand}: To get this message
 
-/{BotCommands.MirrorCommand} : Start mirroring the link to Google Drive
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to google drive
 
-/{BotCommands.UnzipMirrorCommand} : Start mirroring and if downloaded file is any archive, extracts it to Google Drive
+/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link] : starts mirroring and if downloaded file is any archive , extracts it to google drive
 
-/{BotCommands.TarMirrorCommand} : Start mirroring and upload the archived (.tar) extension of the download
+/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: start mirroring and upload the archived (.tar) version of the download
 
-/{BotCommands.WatchCommand} : Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
 
-/{BotCommands.TarWatchCommand} : Mirror through youtube-dl and (.tar) extension before uploading
+/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
 
-/{BotCommands.CancelMirror} : Cancel Mirror
-
-/{BotCommands.CloneCommand} : Clone / Copy files from Google Drive
+/{BotCommands.CancelMirror} : Reply to the message by which the download was initiated and that download will be cancelled
 
 /{BotCommands.StatusCommand}: Shows a status of all the downloads
 
-/{BotCommands.ListCommand} : Search file/folder in the Google drive, if found replies with the link
+/{BotCommands.ListCommand} [search term]: Searches the search term in the Google drive, if found replies with the link
 
-/{BotCommands.SpeedCommand} : Check Internet Speedtest
+/{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
+
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by owner of the bot)
+
+/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
+
+/{BotCommands.SpeedCommand} : Check Internet Speed Of The Host
+
 '''
     sendMessage(help_string, context.bot, update)
 
@@ -114,7 +119,7 @@ def main():
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
-                                     filters=CustomFilters.owner_filter)
+                                     filters=CustomFilters.owner_filter| CustomFilters.authorized_user)
     help_handler = CommandHandler(BotCommands.HelpCommand,
                                   bot_help, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
     stats_handler = CommandHandler(BotCommands.StatsCommand,
