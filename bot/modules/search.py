@@ -153,8 +153,8 @@ Website :- https://sukebei.nyaa.si
 
 Example :                              
 • /hunter2 [Search Query]
-<code>/hunter2 SSNI-101</code>
-<code>/hunter2 HUNTA-965</code>
+• <code>/hunter2 SSNI-202</code>
+• <code>/hunter2 HUNTA-965</code>
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
