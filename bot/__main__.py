@@ -97,7 +97,7 @@ def bot_help(update, context):
 
 /{BotCommands.SpeedCommand} : Check Internet Speedtest
 
-/torrent : Get help For Torrent Search Module.
+/torrent3 : Get Help For Torrent Search Module.
 
 '''
     sendMessage(help_string, context.bot, update)
