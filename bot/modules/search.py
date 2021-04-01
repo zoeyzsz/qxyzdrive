@@ -66,7 +66,7 @@ async def nyaa_search(client, message):
     query = ' '.join(text)
     await init_search(client, message, query, False)
 
-@app.on_message(filters.command(['hunter]))
+@app.on_message(filters.command(['hunter']))
 async def nyaa_search_sukebei(client, message):
     text = message.text.split(' ')
     text.pop(0)
