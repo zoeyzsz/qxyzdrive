@@ -91,7 +91,7 @@ def bot_help(update, context):
 
 /{BotCommands.CloneCommand} : Clone / Copy Files From Google Drive
 
-/{BotCommands.StatusCommand}: Shows a Status of all the Downloads
+/{BotCommands.StatusCommand} : Shows a Status of all the Downloads
 
 /{BotCommands.ListCommand} : Search File/Folder in the Google drive, if Found Replies with the Link
 
