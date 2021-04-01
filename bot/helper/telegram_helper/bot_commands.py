@@ -19,6 +19,6 @@ class _BotCommands:
         self.CloneCommand = "clone4"
         self.WatchCommand = 'watch4'
         self.TarWatchCommand = 'tarwatch4'
-        self.deleteCommand = 'del4'
+        self.deleteCommand = 'rm'
 
 BotCommands = _BotCommands()
