@@ -151,10 +151,10 @@ hunter = Torrent Search
 Note :- This module to display subdomain by nyaa.si website
 Website :- https://sukebei.nyaa.si
 
+Example :                              
 • /hunter1 [Search Query]
-Example :
-<code>/hunter1 SSNI-101</code>
-<code>/hunter1 HUNTA-965</code>
+• <code>/hunter1 SSNI-101</code>
+• <code>/hunter1 HUNTA-965</code>
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
