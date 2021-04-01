@@ -38,7 +38,7 @@ async def return_search(query, page=1, sukebei=False):
                 if splitted.scheme == 'magnet' and splitted.query:
                     link = f'<code>{link}</code>'
                 newtext = f'''{a + 1}. {html.escape(i["title"])}
-<b>🧲 Link :</b> {link}
+<b>🔗 Link :</b> {link}
 <b>📥 Size :</b> {i["nyaa_size"]}
 <b>🧲 Seeders :</b> {i["nyaa_seeders"]}
 <b>🧲 Leechers :</b> {i["nyaa_leechers"]}
@@ -140,11 +140,11 @@ def searchhelp(update, context):
     help_string = '''
 • /ts [Search Query]
 Example :
-`/ts One Piece`
+<code>/ts One Piece</code>
 
 • /hunter [Search Query]
 Example :
-`/hunter SSNI-101` 😁
+<code>/hunter SSNI-101</code>
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
