@@ -153,11 +153,11 @@ Website :- https://sukebei.nyaa.si
 
 Example :                              
 • /hunter4 [Search Query]
-• <code>/hunter4 SSNI-404</code>
+• <code>/hunter4 SSNI-101</code>
 • <code>/hunter4 HUNTA-965</code>
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
     
-SEARCHHELP_HANDLER = CommandHandler("torrent", searchhelp)
+SEARCHHELP_HANDLER = CommandHandler("torrent4", searchhelp)
 dispatcher.add_handler(SEARCHHELP_HANDLER)
