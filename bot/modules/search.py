@@ -59,14 +59,14 @@ async def return_search(query, page=1, sukebei=False):
 
 message_info = dict()
 ignore = set()
-@app.on_message(filters.command(['ts', 'nyaa', 'nyaasi']))
+@app.on_message(filters.command(['ts']))
 async def nyaa_search(client, message):
     text = message.text.split(' ')
     text.pop(0)
     query = ' '.join(text)
     await init_search(client, message, query, False)
 
-@app.on_message(filters.command(['sts', 'sukebei']))
+@app.on_message(filters.command(['hunter]))
 async def nyaa_search_sukebei(client, message):
     text = message.text.split(' ')
     text.pop(0)
@@ -139,14 +139,15 @@ async def nyaa_callback(client, callback_query):
 def searchhelp(update, context):
     help_string = '''
 • /ts [Search Query]
-• /nyaa [Search Query]
-• /nyaasi [Search Query]
+Example :
+`/ts One Piece`
 
-• /sts [Search Query]
-• /sukebei [Search Query]
+• /hunter [Search Query]
+Example :
+`/hunter SSNI-101` 😁
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
     
-SEARCHHELP_HANDLER = CommandHandler("tshelp", searchhelp)
+SEARCHHELP_HANDLER = CommandHandler("torrent", searchhelp)
 dispatcher.add_handler(SEARCHHELP_HANDLER)
