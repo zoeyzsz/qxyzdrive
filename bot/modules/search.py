@@ -151,8 +151,8 @@ hunter = Torrent Search
 Note :- This module to display subdomain by nyaa.si website
 Website :- https://sukebei.nyaa.si
 
-• /hunter [Search Query]
-Example :
+Example :                              
+• /hunter2 [Search Query]
 <code>/hunter2 SSNI-101</code>
 <code>/hunter2 HUNTA-965</code>
 '''
