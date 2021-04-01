@@ -59,14 +59,14 @@ async def return_search(query, page=1, sukebei=False):
 
 message_info = dict()
 ignore = set()
-@app.on_message(filters.command(['ts']))
+@app.on_message(filters.command(['ts4']))
 async def nyaa_search(client, message):
     text = message.text.split(' ')
     text.pop(0)
     query = ' '.join(text)
     await init_search(client, message, query, False)
 
-@app.on_message(filters.command(['hunter']))
+@app.on_message(filters.command(['hunter4']))
 async def nyaa_search_sukebei(client, message):
     text = message.text.split(' ')
     text.pop(0)
@@ -143,18 +143,18 @@ Note :- This module to display links on the nyaa.si website
 Website :- https://nyaa.si
 
 Example :
-• /ts [Search Query]
-• <code>/ts One Piece</code>
-• <code>/ts Boruto</code>
+• /ts4 [Search Query]
+• <code>/ts4 One Piece</code>
+• <code>/ts4 Boruto</code>
 
 hunter = Torrent Search 
 Note :- This module to display subdomain by nyaa.si website
 Website :- https://sukebei.nyaa.si
 
-• /hunter [Search Query]
+• /hunter4 [Search Query]
 Example :
-<code>/hunter SSNI-101</code>
-<code>/hunter HUNTA-965</code>
+<code>/hunter4 SSNI-101</code>
+<code>/hunter4 HUNTA-965</code>
 '''
     update.effective_message.reply_photo("https://telegra.ph/file/2326855aa5ba1d2520e47.jpg", help_string, parse_mode=ParseMode.HTML)
     
